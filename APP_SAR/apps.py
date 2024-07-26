@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class SaraConfig(AppConfig):
+class AppSarConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'SARA'
+    name = 'APP_SAR'

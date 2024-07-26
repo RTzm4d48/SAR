@@ -1,0 +1,34 @@
+{% extends "home.html" %}
+
+{% block content %}
+<section>
+    <div class="molecule_codeModule">
+        <input type="text" value="HHDS">
+    </div>
+</section>
+<section>
+    <div class="molecule_btnSelectFile">
+        <label for="archivo">Seleccione un archivo comprimido .rar</label>
+        <input type="file" id="archivo" name="archivo" accept=".jpg, .jpeg, .png, .pdf">
+    </div>
+</section>
+<section>
+    <div class="molecule_ViewCont">
+    </div>
+</section>
+<section>
+    <div class="molecule_textArea">
+        <textarea name="comentario" id="comentario" cols="30" rows="10" placeholder="Comentario">El archivo se subira al servidor de SARA correspondiente a archivos de audio con referencia al modulo SJ6D
+nombre: SJ6D-4rfg-18_jul_2024-10_19-GO6.mp3
+        </textarea>
+    </div>
+</section>
+<section>
+    <div class="molecule_btnSend">
+        <button>Enviar</button>
+    </div>
+</section>
+<script>
+    document.getElementById('id_folder').classList.add('tipe_select');
+</script>
+{% endblock %}

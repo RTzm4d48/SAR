@@ -1,0 +1,44 @@
+{% extends "home.html" %}
+
+{% block content %}
+<section>
+    <div class="molecule_selection">
+        <label for="seleccion">Elige una opción:</label>
+        <select id="seleccion" name="seleccion">
+            <option value="cedema">Cedema</option>
+            <option value="otros">Otros</option>
+        </select>
+    </div>
+</section>
+<section id="code_module">
+    <div class="molecule_codeModule">
+        <input id="code_moduel" type="text" value="" placeholder="Código de modulo" maxlength="4">
+    </div>
+</section>
+<section>
+    <div class="molecule_btnSelectFile">
+        <label for="archivo">Seleccione un archivo</label>
+        <input type="file" id="select_file" name="archivo" accept=".jpg, .jpeg, .png, .pdf, .mp3, .mp4, .aac">
+    </div>
+</section>
+<section>
+    <div id="view" class="molecule_ViewCont">
+        <p>Viwer de archivos</p>
+    </div>
+</section>
+<section>
+    <div class="molecule_textArea">
+        <aside id="text_explication">
+            <p>Explicación del archivo</p>
+        </aside>
+    </div>
+</section>
+<section>
+    <div class="molecule_btnSend">
+        <button id="bt_send">SUBIR</button>
+    </div>
+</section>
+<script>
+    document.getElementById('id_file').classList.add('tipe_select');
+</script>
+{% endblock %}

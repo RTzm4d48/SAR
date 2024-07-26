@@ -1,0 +1,19 @@
+.template_contPrincipal {
+    height: 100vh;
+}
+
+.template_contForm {
+    margin: auto;
+    width: 100%;
+    /* background: blue; */
+
+    & section {
+        /* background: red; */
+        text-align: center;
+        margin: 20px 0;
+        padding: 5px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}

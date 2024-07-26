@@ -1,5 +1,7 @@
-media
 **/*.pyc
 .vscode/
 .env
 .DS*
+
+sar-cedema/
+sar-otros/

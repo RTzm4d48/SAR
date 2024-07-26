@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAR</title>
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/atoms.css' %}">
+    <link rel="stylesheet" href="{% static 'css/molecules.css' %}">
+    <link rel="stylesheet" href="{% static 'css/organisms.css' %}">
+    <link rel="stylesheet" href="{% static 'css/templates.css' %}">
+</head>
+<body>
+    <div class="style_RES_CONT template_contPrincipal">
+        <div class="template_contForm">
+            <section>
+                <h1>SAR</h1>
+            </section>
+            <section>
+                <div class="organinsm_switch_cont">
+                    <div id="id_folder" class="folder">
+                        <label for="opcion1">Folder</label>
+                        <input type="radio" id="opcion1" name="tipe_file" value="folder">
+                    </div>
+                    <div id="id_file" class="file">
+                        <label for="opcion2">Audio | Image</label>
+                        <input type="radio" id="opcion2" name="tipe_file" value="file">
+                    </div>
+                </div>
+            </section>
+            {% block content %}
+            <!-- STUB : EL CONTENIDO -->
+            {% endblock %}
+        </div>
+    </div>
+    <script type="module" src="{% static 'js/index.js' %}"></script>
+</body>
+</html>
