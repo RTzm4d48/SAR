@@ -44,3 +44,15 @@
         background: var(--color_background);
     }
 }
+
+.organism_cont_dialog_message {
+    background: linear-gradient(135deg, rgba(18, 18, 18, 0.35), rgba(8, 8, 8, 0.194));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+}

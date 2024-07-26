@@ -6,9 +6,9 @@ function chanelTipeFile(event) {
     if (event.target.checked) {
         window.MiOpcion = event.target.value;
         if (event.target.value == "folder") {
-            window.location.href = 'http://localhost:5000/folders/';
+            window.location.href = 'http://localhost:7000/folders/';
         } else {
-            window.location.href = 'http://localhost:5000/files/';
+            window.location.href = 'http://localhost:7000/files/';
         }
     }
 }
@@ -79,6 +79,47 @@ function enviarNombre(name_file, file) {
     .then(response => response.json())
     .then(data => {
         console.log('Success:', data);
+        codigo_de_insersion(data);
     })
     .catch(error => console.error('Error:', error));
 }
+
+function codigo_de_insersion(data){
+    document.getElementById('message_dialog').style.display = 'flex';
+
+    if (data['destination'] == 'cedema') {
+        if (data['typeFile'] == 'image') {
+            let path = `http://localhost:7000/${data['FinalPath']}`;
+            let htmlinsert = "<div class='cedema_img'>\n<a href='"+path+"' target='_blank'>\n<img src='"+path+"'>\n</a>\n</div>";
+            document.getElementById('text_insercion_cedema').value = htmlinsert;
+        }else if (data['typeFile'] == 'audio') {
+            document.getElementById('text_insercion_cedema').innerText = `
+            <div>
+            <audio controls>
+            <source src="http://localhost:7000/${data['FinalPath']}" type="audio/mp3">
+            </audio>
+            </div>
+            `;
+        }else if (data['typeFile'] == 'video') {
+            document.getElementById('text_insercion_cedema').innerText = `
+            <div>
+            <video controls>
+            <source src="http://localhost:7000/${data['FinalPath']}" type="video/mp4">
+            </video>
+            </div>
+            `;
+        }else if (data['typeFile'] == 'rar') {
+            document.getElementById('text_insercion_cedema').innerText = `
+            <div>
+            <img style="height:300px" src="http://localhost:7000/${data['FinalPath']}">
+            </div>
+            `;
+        }
+    }else if (data['destination'] == 'otros') {
+        document.getElementById('text_insercion_cedema').innerText = `http://localhost:7000/${data['FinalPath']}`;
+    }
+}
+
+document.getElementById('btn_close').addEventListener('click', function(event){
+    window.location.href = 'http://localhost:7000/files/';
+});

@@ -31,9 +31,12 @@ def procesar_nombre(request):
         typeFile = request.POST.get('tipeFile', '')
         destination = request.POST.get('destination', '')
 
+        print('DESTINO:::')
+        print(destination)
+
         finalPath = write_file(name_file, myfile, typeFile, destination)
 
-        response_data = {'FinalPath': finalPath}
+        response_data = {'FinalPath': finalPath, "typeFile": typeFile, "destination": destination}
         return JsonResponse(response_data)
     else:
         return JsonResponse({'error': 'Método no permitido'}, status=405)
@@ -57,6 +60,16 @@ def write_file(file_name, imgcapture, typeFile, destination):
                 path_file = f'media/SARA/sar-cedema/{file_name}'
             elif(destination == 'otros'):
                 path_file = f'media/SARA/sar-otros/{file_name}'
+        elif(typeFile == 'video'):
+            if(destination == 'cedema'):
+                path_file = f'media/SARV/sar-cedema/{file_name}'
+            elif(destination == 'otros'):
+                path_file = f'media/SARV/sar-otros/{file_name}'
+        elif(typeFile == 'rar'):
+            if(destination == 'cedema'):
+                path_file = f'media/SARDA/sar-cedema/{file_name}'
+            elif(destination == 'otros'):
+                path_file = f'media/SARDA/sar-otros/{file_name}'
         
         with open(f'APP_SAR/{path_file}', 'wb') as f:
             for chunk in imgcapture.chunks():

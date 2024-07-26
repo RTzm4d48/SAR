@@ -20,16 +20,28 @@ export function paint_file(reader) {
 
         let type = valid_extension_file()['type'];
 
+        let img_html_view = `<img src="${e.target.result}" alt="Vista previa de la imagen">`;
+        let audio_html_view = `<audio controls>
+            <source src="${e.target.result}" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
+        </audio>`;
+        let video_html_view = `<video width="320" height="240" controls>
+            <source src="${e.target.result}" type="video/mp4">
+            Tu navegador no soporta el elemento de video.
+        </video>`;
+        let rar_html_view = `<img src="/static/img/rar_icon.png" style="height: 30%; margin: auto;">`;
+
+
         if (type == 'image') {
-            html_view = `<img src="${e.target.result}" alt="Vista previa de la imagen">`;
+            document.getElementById('view').innerHTML = img_html_view;
         }else if (type == 'audio') {
-            html_view = `<audio controls>
-                <source src="${e.target.result}" type="audio/mpeg">
-                Tu navegador no soporta el elemento de audio.
-            </audio>`;
-            
+            document.getElementById('view').innerHTML = audio_html_view;
+        }else if (type == 'video') {
+            document.getElementById('view').innerHTML = video_html_view;
+        }else if (type == 'rar') {
+            document.getElementById('view').innerHTML = rar_html_view;
         }
-        document.getElementById('view').innerHTML = html_view;
+        
     };
 }
 
@@ -48,6 +60,12 @@ export function preparation_file() {
     }else if (type == 'audio') {
         text = `El archivo se subira al servidor de <span>SARI</span> correspondiente a archivos de <span>audio</span> con referencia al modulo <span>${code_moduel}</span><br>
         nombre: <span>${fine_name}</span>`;
+    }else if (type == 'video') {
+        text = `El archivo se subira al servidor de <span>SARV</span> correspondiente a archivos de <span>video</span> con referencia al modulo <span>${code_moduel}</span><br>
+        nombre: <span>${fine_name}</span>`;
+    }else if (type == 'rar') {
+        text = `El archivo se subira al servidor de <span>SARDA</span> correspondiente a archivos de <span>.rar</span> con referencia al modulo <span>${code_moduel}</span><br>
+        nombre: <span>${fine_name}</span>`;
     }
 
     document.getElementById('text_explication').innerHTML = text;
@@ -63,12 +81,17 @@ export function valid_extension_file() {
     
     if (file) {
         var fileType = file.type;
-        // console.log('Tipo de archivo: ' + fileType);
+        console.log('PATOO');
+        console.log('Tipo de archivo: ' + fileType);
         
         if (fileType.startsWith('image/')) {
             return {"type": 'image', "extension": fileExtension};
         } else if (fileType.startsWith('audio/')) {
             return {"type": 'audio', "extension": fileExtension};
+        } else if (fileType.startsWith('video/')) {
+            return {"type": 'video', "extension": fileExtension};
+        } else if (fileType.startsWith('application/')) {
+            return {"type": 'rar', "extension": fileExtension};
         } else {
             console.log('Tipo de archivo no soportado');
             return 'no soport';

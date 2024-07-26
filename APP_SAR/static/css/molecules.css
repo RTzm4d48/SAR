@@ -151,3 +151,52 @@
         }
     }
 }
+
+.molecule_dialog_message {
+    background: var(--color_background_2);
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+
+    & h3 {
+        margin: auto;
+        text-align: center;
+    }
+
+    & textarea {
+        background: var(--color_background);
+        min-width: calc(100% - 22px);
+        min-height: 100px;
+        max-height: 100px;
+        border: 1px solid var(--color_border);
+        margin: 10px 0;
+        color: var(--color_text);
+        font-size: 12px;
+        padding: 10px;
+        border-radius: 5px;
+        white-space: pre-line;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    & button {
+        background: var(--color_terciario);
+        padding: 5px 15px;
+        margin: auto;
+        cursor: pointer;
+        opacity: 1;
+        border: none;
+        border-radius: 5px;
+        color: var(--color_text);
+
+        &:hover {
+            opacity: 0.8;
+        }
+
+    }
+}
