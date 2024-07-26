@@ -1,4 +1,5 @@
-import { preparation_file, paint_file, obtain_select } from './controller.js';
+import { preparation_file, paint_file, obtain_select, valid_extension_file } from './controller.js';
+import { getCookie } from './utils.js';
 
 // ANCHOR : EL RADIO BUTTONS DE ELECCION
 function chanelTipeFile(event) {
@@ -48,5 +49,36 @@ document.getElementById('bt_send').addEventListener('click', function(event){
     
     // let type = valid_extension_file()['type'];
     // const code_moduel = document.getElementById('code_moduel').value;
+    // enviarNombre();
+    
+    const fileInput = document.getElementById('select_file');
+    var file = fileInput.files[0];
+
+    console.log('File:', file);
+    console.log("File_name: ", window.fine_name);
+
+    enviarNombre(window.fine_name, file);
 
 });
+
+function enviarNombre(name_file, file) {
+    const formData = new FormData();
+
+    formData.append('name_file', name_file);
+    formData.append('myfile', file);
+    formData.append('tipeFile', valid_extension_file()['type']);
+    formData.append('destination', document.getElementById('seleccion').value);
+
+    fetch('/procesar-nombre/', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken')
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+    })
+    .catch(error => console.error('Error:', error));
+}

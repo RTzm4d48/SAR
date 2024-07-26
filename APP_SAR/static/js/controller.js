@@ -11,6 +11,7 @@ export function obtain_select() {
         document.getElementById('code_moduel').style.display = 'block';
         document.getElementById('code_moduel').value = '';
     }
+    return selectedValue;
 }
 
 export function paint_file(reader) {
@@ -36,24 +37,24 @@ export function preparation_file() {
     const code_moduel = document.getElementById('code_moduel').value;
     let text = '';
 
-    window.fine_name = `${code_moduel}-${code_file()}-${date()}-GO6`;
-
     let type = valid_extension_file()['type'];
     let extension = valid_extension_file()['extension'];
+    
+    window.fine_name = `${code_moduel}-${code_file()}-${date()}-GO6.${extension}`;
 
     if(type == 'image') {
         text = `El archivo se subira al servidor de <span>SARI</span> correspondiente a archivos de <span>imagen</span> con referencia al modulo <span>${code_moduel}</span><br>
         nombre: <span>${fine_name}.${extension}</span>`;
     }else if (type == 'audio') {
         text = `El archivo se subira al servidor de <span>SARI</span> correspondiente a archivos de <span>audio</span> con referencia al modulo <span>${code_moduel}</span><br>
-        nombre: <span>${fine_name}.${extension}</span>`;
+        nombre: <span>${fine_name}</span>`;
     }
 
     document.getElementById('text_explication').innerHTML = text;
 }
 
 
-function valid_extension_file() {
+export function valid_extension_file() {
     const fileInput = document.getElementById('select_file');
     var file = fileInput.files[0];
 
