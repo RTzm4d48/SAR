@@ -121,5 +121,10 @@ function codigo_de_insersion(data){
 }
 
 document.getElementById('btn_close').addEventListener('click', function(event){
+
+    console.log("CLOSE COPIEEEEEE");
+    let insert_code = document.getElementById('text_insercion_cedema').value.trim();
+    console.log('Insert_code:', insert_code);
+    window.navigator.clipboard.writeText(insert_code);
     window.location.href = 'http://localhost:7000/files/';
 });
