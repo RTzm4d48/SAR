@@ -1,4 +1,4 @@
-import { show_dile } from '/static/js/views.js';
+import { ventanaView, NuevosEventos2 } from '/static/js/views.js';
 
 export function renderisarTabla(data) {
     document.getElementById('contRegister').innerHTML = "";
@@ -48,6 +48,8 @@ function NuevosEventos_tabla() {
                 let tipo = e.target.parentElement.children[4].textContent;
                 let destino = e.target.parentElement.children[5].textContent;
 
+                this.classList.toggle('active');
+
                 show_dile(name_file, code, code_destino, extension, tipo, destino);
                 });
         });
@@ -57,4 +59,9 @@ function NuevosEventos_tabla() {
     } else {
         setupListeners();
     }
+}
+
+function show_dile(name_file, code, code_destino, extension, tipo, destino) {
+    document.getElementById('cont_ventana_view').innerHTML = ventanaView(name_file, tipo, destino);
+    NuevosEventos2();
 }

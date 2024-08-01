@@ -1,6 +1,7 @@
 import { preparation_file, valid_extension_file } from './mainController.js';
 import { getCookie } from '/static/js/utils.js';
-import { show_dile } from '/static/js/views.js';
+import { ventanaView, NuevosEventos } from '/static/js/views.js';
+
 
 export function UploadFileInDataBase(file) {
     const formData = new FormData();
@@ -31,4 +32,9 @@ export function UploadFileInDataBase(file) {
         show_dile(data['name_file'], data['code'], data['code_destino'], data['extension'], data['tipo'], data['destino'])
     })
     .catch(error => console.error('Error:', error));
+}
+
+function show_dile(name_file, code, code_destino, extension, tipo, destino) {
+    document.getElementById('cont_ventana_view').innerHTML = ventanaView(name_file, tipo, destino);
+    NuevosEventos();
 }

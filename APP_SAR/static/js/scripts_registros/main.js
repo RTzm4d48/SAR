@@ -6,4 +6,3 @@ document.getElementById('seleccion_tipo').addEventListener('change', function(){
     console.log(tipo);
     ObtainDataTablet(tipo);
 });
-

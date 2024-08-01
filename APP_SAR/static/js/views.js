@@ -1,8 +1,3 @@
-export function show_dile(name_file, code, code_destino, extension, tipo, destino) {
-    document.getElementById('cont_ventana_view').innerHTML = ventanaView(name_file, tipo, destino);
-    NuevosEventos();
-}
-
 export function ventanaView(name_file, tipo, destino) {
     let html = `
     <div id="message_dialog_view" class="organism_cont_dialog_message">
@@ -81,7 +76,7 @@ function codeInser_view(name_file, tipo, destino) {
     }
 }
 
-function NuevosEventos() {
+export function NuevosEventos() {
     function setupListeners() {
         document.getElementById('btn_copy_close_view').addEventListener('click', function(e) {
             let insert_code = document.getElementById('text_insercion_cedema_view').value.trim();
@@ -93,6 +88,26 @@ function NuevosEventos() {
         document.getElementById('btn_close_view').addEventListener('click', function(e) {
             // window.location.href = 'http://localhost:7000/registros/';
             location.reload();
+        });
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setupListeners);
+    } else {
+        setupListeners();
+    }
+}
+
+
+export function NuevosEventos2() {
+    function setupListeners() {
+        document.getElementById('btn_copy_close_view').addEventListener('click', function(e) {
+            let insert_code = document.getElementById('text_insercion_cedema_view').value.trim();
+            window.navigator.clipboard.writeText(insert_code);
+            document.getElementById('cont_ventana_view').innerHTML = '';
+        });
+        
+        document.getElementById('btn_close_view').addEventListener('click', function(e) {
+            document.getElementById('cont_ventana_view').innerHTML = '';
         });
     }
     if (document.readyState === 'loading') {

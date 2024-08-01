@@ -238,10 +238,21 @@
             cursor: pointer;
 
             &:hover {
-                background: var(--color_background);
+                background: var(--color_background_3);
             }
+        }
+
+        .active {
+            background: var(--color_background_3); /* El color que quieres que se mantenga */
         }
     }
 
 
+}
+
+.moolecules_contVentanaEmergente {
+    /* position: fixed;
+    top: 0;
+    left: 0;
+    margin: auto; */
 }

@@ -29,8 +29,12 @@ document.getElementById('code_moduel').addEventListener('input', function(event)
 document.getElementById('bt_send').addEventListener('click', function(event){        
     const fileInput = document.getElementById('select_file');
     let file = fileInput.files[0];
-
-    UploadFileInDataBase(file);
+    let code_destino = document.getElementById('code_moduel').value;
+    if (code_destino == '') {
+        alert('Ingrese el código destino');
+    }else {
+        UploadFileInDataBase(file);
+    }
 });
 
 // document.getElementById('btn_copy_close').addEventListener('click', function(){
