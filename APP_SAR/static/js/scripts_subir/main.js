@@ -1,12 +1,10 @@
-import { preparation_file, paint_file, obtain_select } from './mainController.js';
+import { preparation_file, paint_file } from './mainController.js';
 import { UploadFileInDataBase } from './ApiService.js'
 
 // NOTE : EVENTOS
 document.getElementById('select_file').addEventListener('change', function(event){
     var file = event.target.files[0];
     var reader = new FileReader();
-
-    obtain_select();
     
     if (file) {
         paint_file(reader);
@@ -18,7 +16,6 @@ document.getElementById('select_file').addEventListener('change', function(event
 });
 
 document.getElementById('seleccion').addEventListener('change', function(e) {
-    obtain_select();
     preparation_file();
 });
 

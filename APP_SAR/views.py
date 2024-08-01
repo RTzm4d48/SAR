@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from APP_SAR.models import sar
 
+from django.conf import settings
+import os
+
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
@@ -65,32 +68,26 @@ def write_file(file_name, imgcapture, typeFile, destination):
         print(typeFile)
         print(destination)
 
-        path_file = ''
+        path_folder = ''
         if(typeFile == 'image'):
-            if(destination == 'cedema'):
-                path_file = f'media/SARI/sar-cedema/{file_name}'
-            elif(destination == 'otros'):
-                path_file = f'media/SARI/sar-otros/{file_name}'
+                path_folder = f'media/SARI/{destination}'
         elif(typeFile == 'audio'):
-            if(destination == 'cedema'):
-                path_file = f'media/SARA/sar-cedema/{file_name}'
-            elif(destination == 'otros'):
-                path_file = f'media/SARA/sar-otros/{file_name}'
+                path_folder = f'media/SARA/{destination}'
         elif(typeFile == 'video'):
-            if(destination == 'cedema'):
-                path_file = f'media/SARV/sar-cedema/{file_name}'
-            elif(destination == 'otros'):
-                path_file = f'media/SARV/sar-otros/{file_name}'
+                path_folder = f'media/SARV/{destination}'
         elif(typeFile == 'rar'):
-            if(destination == 'cedema'):
-                path_file = f'media/SARDA/sar-cedema/{file_name}'
-            elif(destination == 'otros'):
-                path_file = f'media/SARDA/sar-otros/{file_name}'
+                path_folder = f'media/SARDA/{destination}'
         
-        with open(f'APP_SAR/{path_file}', 'wb') as f:
+        if not os.path.exists(f'APP_SAR/{path_folder}'):
+            os.makedirs(f'APP_SAR/{path_folder}')
+        else:
+            print('El directorio static ya existe.')
+
+        with open(f'APP_SAR/{path_folder}/{file_name}', 'wb') as f:
             for chunk in imgcapture.chunks():
                 f.write(chunk)
-        return path_file
+        
+        return f'{path_folder}/{file_name}'
 
 
 def insert_dataBase(file_name, typeFile, code_file, code_destino, extension, destino):

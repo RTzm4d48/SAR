@@ -36,7 +36,7 @@ function codeInser_view(name_file, tipo, destino) {
     let video_codeInsert = '';
     let rar_codeInsert = '';
 
-    if (destino == 'cedema') {
+    if (destino.startsWith('sar-cedema')) {
         img_codeInsert = "<div class='cedema_img'>\n<a href='"+path+"' target='_blank'>\n<img src='"+path+"'>\n</a>\n</div>";
         audio_codeInsert = `
         <div>
@@ -57,7 +57,7 @@ function codeInser_view(name_file, tipo, destino) {
         <img style="height:300px" src="${path}">
         </div>
         `;
-    }else if (destino == 'otros') {
+    }else if (destino.startsWith('sar-otros')) {
         img_codeInsert = path;
         audio_codeInsert = path;
         video_codeInsert = path;

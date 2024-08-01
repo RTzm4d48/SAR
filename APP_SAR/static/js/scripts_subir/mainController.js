@@ -1,19 +1,5 @@
 import { date, code_file } from '../utils.js';
 
-export function obtain_select() {
-    var selectElement = document.getElementById('seleccion');
-    var selectedValue = selectElement.value;
-
-    if (selectedValue == 'otros') {
-        document.getElementById('code_moduel').style.display = 'none';
-        document.getElementById('code_moduel').value = 'Otros';
-    }else if(selectedValue == 'cedema') {
-        document.getElementById('code_moduel').style.display = 'block';
-        document.getElementById('code_moduel').value = '';
-    }
-    return selectedValue;
-}
-
 export function paint_file(reader) {
     reader.onload = function(e) {
         let type = valid_extension_file()['type'];
@@ -39,12 +25,11 @@ export function paint_file(reader) {
         }else if (type == 'rar') {
             document.getElementById('view').innerHTML = rar_html_view;
         }
-        
     };
 }
 
 export function preparation_file() {
-    const code_moduel = document.getElementById('code_moduel').value;
+    const code_moduel = document.getElementById('code_moduel').value != '' ? document.getElementById('code_moduel').value : 'nope';
     let text = '';
     
     let type = valid_extension_file()['type'];
