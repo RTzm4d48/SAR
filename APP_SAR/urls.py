@@ -1,10 +1,10 @@
 from django.urls import path
 from . import views
-from .views import procesar_nombre
+
 
 urlpatterns = [
     path('', views.home, name='n_home'),
-    path('files/', views.files, name='n_files'),
-    path('folders/', views.folders, name='n_folders'),
-    path('procesar-nombre/', procesar_nombre, name='procesar_nombre'),
+    path('subir/', views.subir, name='n_subir'),
+    path('registros/', views.registros, name='n_registros'),
+    path('uploadFile/', views.upload_file, name='n_upload_file'),
 ]

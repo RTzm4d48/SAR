@@ -1,0 +1,94 @@
+{% extends "home.html" %}
+{% load static %}
+
+{% block title %}
+<title>Registros</title>
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/registros.css' %}">
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="molecule_selection">
+        <label for="seleccion">Seleccionar tipo de archivo</label>
+        <select id="seleccion_tipo" name="seleccion">
+            <option value="sari">SARI</option>
+            <option value="sara">SARA</option>
+            <option value="sarv">SARV</option>
+            <option value="sarda">SARDA</option>
+        </select>
+    </div>
+</section>
+<section>
+    <div id="contRegister" class="molecule_contRegister">
+        <!-- STUB : TABLA DE LOS REGISTROS -->
+    </div>
+    <div>
+    </div>
+    <div id="cont_ventana_view" class="molecule_contRegister">
+        <!-- STUB : TABLA DE LOS REGISTROS -->
+    </div>
+</section>
+
+<script type="module">
+    import { ventanaView } from '/static/js/views.js';
+    let data = JSON.parse('{{ data|safe }}');
+
+    document.getElementById('contRegister').innerHTML = `
+    <table id="table_register">
+            <tr>
+                <th>Name File</th>
+                <th>Code</th>
+                <th>Code Destino</th>
+                <th>Extensión</th>
+                <th>tipo</th>
+            </tr>
+            ${html_table_register()}
+        </table>
+    `;
+
+    function html_table_register() {
+        let html = ``;
+        for (let i = 0; i < data.length; i++) {
+            html += `
+                <tr class="registros_select">
+                    <td>${data[i].name_file}</td>
+                    <td>${data[i].code}</td>
+                    <td>${data[i].code_destino}</td>
+                    <td>${data[i].extension}</td>
+                    <td>${data[i].tipo}</td>
+                </tr>
+            `;
+        }
+        return html;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const buttons_R = document.querySelectorAll('.registros_select');
+
+        buttons_R.forEach(function(button) {
+            button.addEventListener('click', function(e) {
+                let name_file = e.target.parentElement.children[0].textContent;
+                let code = e.target.parentElement.children[1].textContent;
+                let code_destino = e.target.parentElement.children[2].textContent;
+                let extension = e.target.parentElement.children[3].textContent;
+                let tipo = e.target.parentElement.children[4].textContent;
+
+                show_dile(name_file, code, code_destino, extension, tipo);
+                });
+        });
+    });
+
+    function show_dile(name_file, code, code_destino, extension, tipo) {
+        document.getElementById('cont_ventana_view').innerHTML = ventanaView(name_file, tipo);
+    }
+
+    document.getElementById('id_folder').classList.add('tipe_select');
+</script>
+{% endblock %}
+
+{% block scriptContent %}
+<script type="module" src="{% static 'js/scripts_registros/main.js' %}"></script>
+{% endblock %}

@@ -1,12 +1,3 @@
-export function code_file() {
-    const caracteres = 'abcdfghijkmnopqrstuvwyz';
-    let resultado = '';
-    for (let i = 0; i < 4; i++) {
-        const indiceAleatorio = Math.floor(Math.random() * caracteres.length);
-        resultado += caracteres.charAt(indiceAleatorio);
-    }
-    return resultado;
-}
 
 export function date() {
     const fechaActual = new Date();
@@ -21,21 +12,15 @@ function string_month(mes) {
     return month[mes];
 }
 
-// export function getCookie(name) {
-//     var cookieValue = null;
-//     if (document.cookie && document.cookie !== '') {
-//         var cookies = document.cookie.split(';');
-//         for (var i = 0; i < cookies.length; i++) {
-//             var cookie = jQuery.trim(cookies[i]);
-//             // ¿El cookie comienza con el nombre que queremos?
-//             if (cookie.substring(0, name.length + 1) === (name + '=')) {
-//                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-//                 break;
-//             }
-//         }
-//     }
-//     return cookieValue;
-// }
+export function code_file() {
+    const caracteres = 'abcdfghijkmnopqrstuvwyz';
+    let resultado = '';
+    for (let i = 0; i < 4; i++) {
+        const indiceAleatorio = Math.floor(Math.random() * caracteres.length);
+        resultado += caracteres.charAt(indiceAleatorio);
+    }
+    return resultado;
+}
 
 export function getCookie(name) {
     let cookieValue = null;

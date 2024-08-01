@@ -1,5 +1,6 @@
 {% extends "home.html" %}
 {% load static %}
+
 {% block content %}
 <section>
     <div class="molecule_selection">
@@ -44,10 +45,17 @@
         <h3>Codigo de insersion en Cedema</h3>
         <textarea name="" id="text_insercion_cedema" placeholder="code">
         </textarea>
-        <button id="btn_close">Copiar y Cerrar</button>
+        <div style="display: flex;">
+            <button id="btn_copy_close">Copiar y Cerrar</button>
+            <button id="btn_close">Cerrar</button>
+        </div>
     </div>
 </div>
 <script>
     document.getElementById('id_file').classList.add('tipe_select');
 </script>
+{% endblock %}
+
+{% block scriptContent %}
+<script type="module" src="{% static 'js/scripts_subir/main.js' %}"></script>
 {% endblock %}

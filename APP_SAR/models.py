@@ -1,22 +1,41 @@
 from django.db import models
 
 # Create your models here.
-class image(models.Model):
+class sari(models.Model):
     name_file = models.TextField(null=False)
-    code = models.CharField(max_length=100, null=False)
-    code_module = models.CharField(max_length=100, null=True)
-    game_over = models.CharField(max_length=10)
+    code = models.CharField(max_length=20, null=False) # CODIGO DEL PROPIO ARCHIVO
+    code_destino = models.CharField(max_length=20, null=True) # YA SEA DEL CEDEMA U OTRO CODIGO PAL QUE ESTE DESTINADOE ESTE ARCHIVO
     created = models.DateTimeField(auto_now_add=True)
     extension = models.CharField(max_length=10)
 
     def __str__(self):
         return self.name_file
     
-class audio(models.Model):
+class sara(models.Model):
     name_file = models.TextField(null=False)
-    code = models.CharField(max_length=100, null=False)
-    code_module = models.CharField(max_length=100, null=True)
-    game_over = models.CharField(max_length=10)
+    code = models.CharField(max_length=20, null=False) # CODIGO DEL PROPIO ARCHIVO
+    code_destino = models.CharField(max_length=20, null=True) # YA SEA DEL CEDEMA U OTRO CODIGO PAL QUE ESTE DESTINADOE ESTE ARCHIVO
+    created = models.DateTimeField(auto_now_add=True)
+    extension = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.name_file
+    
+
+class sarda(models.Model):
+    name_file = models.TextField(null=False)
+    code = models.CharField(max_length=20, null=False) # CODIGO DEL PROPIO ARCHIVO
+    code_destino = models.CharField(max_length=20, null=True) # YA SEA DEL CEDEMA U OTRO CODIGO PAL QUE ESTE DESTINADOE ESTE ARCHIVO
+    created = models.DateTimeField(auto_now_add=True)
+    extension = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.name_file
+    
+class sarv(models.Model):
+    name_file = models.TextField(null=False)
+    code = models.CharField(max_length=20, null=False) # CODIGO DEL PROPIO ARCHIVO
+    code_destino = models.CharField(max_length=20, null=True) # YA SEA DEL CEDEMA U OTRO CODIGO PAL QUE ESTE DESTINADOE ESTE ARCHIVO
     created = models.DateTimeField(auto_now_add=True)
     extension = models.CharField(max_length=10)
 

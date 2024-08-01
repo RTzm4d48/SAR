@@ -1,4 +1,4 @@
-import { code_file, date } from './utils.js';
+import { date, code_file } from './utils.js';
 
 export function obtain_select() {
     var selectElement = document.getElementById('seleccion');
@@ -16,8 +16,6 @@ export function obtain_select() {
 
 export function paint_file(reader) {
     reader.onload = function(e) {
-        let html_view = '';
-
         let type = valid_extension_file()['type'];
 
         let img_html_view = `<img src="${e.target.result}" alt="Vista previa de la imagen">`;
@@ -48,27 +46,29 @@ export function paint_file(reader) {
 export function preparation_file() {
     const code_moduel = document.getElementById('code_moduel').value;
     let text = '';
-
-    let type = valid_extension_file()['type'];
-    let extension = valid_extension_file()['extension'];
     
-    window.fine_name = `${code_moduel}-${code_file()}-${date()}-GO6.${extension}`;
+    let type = valid_extension_file()['type'];
+    let extension = '.'+valid_extension_file()['extension'];
+    
+    let fileCode = code_file();
+    
+    let fileName  = `${code_moduel}-${fileCode}-${date()}-GO6${extension}`;
 
     if(type == 'image') {
         text = `El archivo se subira al servidor de <span>SARI</span> correspondiente a archivos de <span>imagen</span> con referencia al modulo <span>${code_moduel}</span><br>
-        nombre: <span>${fine_name}.${extension}</span>`;
+        nombre: <span>${fileName}</span>`;
     }else if (type == 'audio') {
         text = `El archivo se subira al servidor de <span>SARI</span> correspondiente a archivos de <span>audio</span> con referencia al modulo <span>${code_moduel}</span><br>
-        nombre: <span>${fine_name}</span>`;
+        nombre: <span>${fileName}</span>`;
     }else if (type == 'video') {
         text = `El archivo se subira al servidor de <span>SARV</span> correspondiente a archivos de <span>video</span> con referencia al modulo <span>${code_moduel}</span><br>
-        nombre: <span>${fine_name}</span>`;
+        nombre: <span>${fileName}</span>`;
     }else if (type == 'rar') {
         text = `El archivo se subira al servidor de <span>SARDA</span> correspondiente a archivos de <span>.rar</span> con referencia al modulo <span>${code_moduel}</span><br>
-        nombre: <span>${fine_name}</span>`;
+        nombre: <span>${fileName}</span>`;
     }
-
     document.getElementById('text_explication').innerHTML = text;
+    return {fileCode, fileName, extension};
 }
 
 
@@ -81,9 +81,7 @@ export function valid_extension_file() {
     
     if (file) {
         var fileType = file.type;
-        console.log('PATOO');
-        console.log('Tipo de archivo: ' + fileType);
-        
+
         if (fileType.startsWith('image/')) {
             return {"type": 'image', "extension": fileExtension};
         } else if (fileType.startsWith('audio/')) {
