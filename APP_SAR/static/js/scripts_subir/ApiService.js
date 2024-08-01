@@ -1,5 +1,6 @@
 import { preparation_file, valid_extension_file } from './mainController.js';
-import { getCookie } from '../utils.js';
+import { getCookie } from '/static/js/utils.js';
+import { show_dile } from '/static/js/views.js';
 
 export function UploadFileInDataBase(file) {
     const formData = new FormData();
@@ -13,6 +14,7 @@ export function UploadFileInDataBase(file) {
     formData.append('tipeFile', valid_extension_file()['type']);
     formData.append('destination', document.getElementById('seleccion').value);
     formData.append('code_file', data_prepare['fileCode']);
+    formData.append('destino', document.getElementById('seleccion').value);
     formData.append('code_destino', document.getElementById('code_moduel').value);
     formData.append('extension', data_prepare['extension']);
 
@@ -26,43 +28,7 @@ export function UploadFileInDataBase(file) {
     .then(response => response.json())
     .then(data => {
         console.log('Success:', data);
-        codigo_de_insersion(data);
+        show_dile(data['name_file'], data['code'], data['code_destino'], data['extension'], data['tipo'], data['destino'])
     })
     .catch(error => console.error('Error:', error));
-}
-
-function codigo_de_insersion(data){
-    document.getElementById('message_dialog').style.display = 'flex';
-
-    if (data['destination'] == 'cedema') {
-        if (data['typeFile'] == 'image') {
-            let path = `http://localhost:7000/${data['FinalPath']}`;
-            let htmlinsert = "<div class='cedema_img'>\n<a href='"+path+"' target='_blank'>\n<img src='"+path+"'>\n</a>\n</div>";
-            document.getElementById('text_insercion_cedema').value = htmlinsert;
-        }else if (data['typeFile'] == 'audio') {
-            document.getElementById('text_insercion_cedema').innerText = `
-            <div>
-            <audio controls>
-            <source src="http://localhost:7000/${data['FinalPath']}" type="audio/mp3">
-            </audio>
-            </div>
-            `;
-        }else if (data['typeFile'] == 'video') {
-            document.getElementById('text_insercion_cedema').innerText = `
-            <div>
-            <video controls>
-            <source src="http://localhost:7000/${data['FinalPath']}" type="video/mp4">
-            </video>
-            </div>
-            `;
-        }else if (data['typeFile'] == 'rar') {
-            document.getElementById('text_insercion_cedema').innerText = `
-            <div>
-            <img style="height:300px" src="http://localhost:7000/${data['FinalPath']}">
-            </div>
-            `;
-        }
-    }else if (data['destination'] == 'otros') {
-        document.getElementById('text_insercion_cedema').innerText = `http://localhost:7000/${data['FinalPath']}`;
-    }
 }

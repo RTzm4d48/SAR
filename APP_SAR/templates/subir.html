@@ -39,23 +39,15 @@
         <button id="bt_send">SUBIR</button>
     </div>
 </section>
-
-<div id="message_dialog" class="organism_cont_dialog_message" style="display: none;">
-    <div class="molecule_dialog_message">
-        <h3>Codigo de insersion en Cedema</h3>
-        <textarea name="" id="text_insercion_cedema" placeholder="code">
-        </textarea>
-        <div style="display: flex;">
-            <button id="btn_copy_close">Copiar y Cerrar</button>
-            <button id="btn_close">Cerrar</button>
-        </div>
-    </div>
+<div id="cont_ventana_view" class="molecule_contRegister">
+    <!-- STUB : VENTANA VIWER -->
 </div>
-<script>
-    document.getElementById('subir_select').classList.add('tipe_select');
-</script>
 {% endblock %}
 
 {% block scriptContent %}
 <script type="module" src="{% static 'js/scripts_subir/main.js' %}"></script>
+<script>
+    // NOTE : ESTILO DE ACTIVE DEL RADIO BUTTON
+    document.getElementById('subir_select').classList.add('tipe_select');
+</script>
 {% endblock %}

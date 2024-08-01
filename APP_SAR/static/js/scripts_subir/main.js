@@ -33,12 +33,12 @@ document.getElementById('bt_send').addEventListener('click', function(event){
     UploadFileInDataBase(file);
 });
 
-document.getElementById('btn_copy_close').addEventListener('click', function(){
-    let insert_code = document.getElementById('text_insercion_cedema').value.trim();
-    window.navigator.clipboard.writeText(insert_code);
-    window.location.href = 'http://localhost:7000/subir/';
-});
+// document.getElementById('btn_copy_close').addEventListener('click', function(){
+//     let insert_code = document.getElementById('text_insercion_cedema').value.trim();
+//     window.navigator.clipboard.writeText(insert_code);
+//     window.location.href = 'http://localhost:7000/subir/';
+// });
 
-document.getElementById('btn_close').addEventListener('click', function(){
-    window.location.href = 'http://localhost:7000/subir/';
-});
+// document.getElementById('btn_close').addEventListener('click', function(){
+//     window.location.href = 'http://localhost:7000/subir/';
+// });

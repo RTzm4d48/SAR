@@ -1,4 +1,4 @@
-import { getCookie } from '../utils.js';
+import { getCookie } from '/static/js/utils.js';
 import { renderisarTabla } from './views.js';
 
 export function ObtainDataTablet(type) {
