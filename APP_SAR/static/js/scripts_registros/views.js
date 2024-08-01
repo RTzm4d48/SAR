@@ -6,9 +6,7 @@ export function ventanaView(name_file, tipo) {
                 ${codeInser_view(name_file, tipo)[`html_view`]}
             </div>
             <h3>Codigo de insersion en Cedema</h3>
-            <textarea name="" id="text_insercion_cedema_view" placeholder="code">
-                ${codeInser_view(name_file, tipo)[`code_inner`]}
-            </textarea>
+            <textarea name="" id="text_insercion_cedema_view" placeholder="code">${codeInser_view(name_file, tipo)[`code_inner`]}</textarea>
             <div style="display: flex;">
                 <button id="btn_copy_close_view">Copiar y Cerrar</button>
                 <button id="btn_close_view">Cerrar</button>
@@ -16,6 +14,37 @@ export function ventanaView(name_file, tipo) {
         </div>
     </div>
     `;
+    return html;
+}
+
+export function renderisarTabla(data) {
+    document.getElementById('contRegister').innerHTML = `
+    <table id="table_register">
+            <tr>
+                <th>Name File</th>
+                <th>Code</th>
+                <th>Code Destino</th>
+                <th>Extensión</th>
+                <th>tipo</th>
+            </tr>
+            ${html_table_register(data)}
+        </table>
+    `;
+}
+
+function html_table_register(data) {
+    let html = ``;
+    for (let i = 0; i < data.length; i++) {
+        html += `
+            <tr class="registros_select">
+                <td>${data[i].name_file}</td>
+                <td>${data[i].code}</td>
+                <td>${data[i].code_destino}</td>
+                <td>${data[i].extension}</td>
+                <td>${data[i].tipo}</td>
+            </tr>
+        `;
+    }
     return html;
 }
 

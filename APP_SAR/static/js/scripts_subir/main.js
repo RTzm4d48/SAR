@@ -1,22 +1,5 @@
-import { preparation_file, paint_file, obtain_select } from '../mainController.js';
-import { UploadFileInDataBase } from '../ApiService.js'
-
-// ANCHOR : EL RADIO BUTTONS DE ELECCION
-function chanelTipeFile(event) {
-    if (event.target.checked) {
-        window.MiOpcion = event.target.value;
-        if (event.target.value == "folder") {
-            window.location.href = 'http://localhost:7000/registros/';
-        } else {
-            window.location.href = 'http://localhost:7000/subir/';
-        }
-    }
-}
-
-let nombre = document.getElementsByName('tipe_file');
-for (const n of nombre) {
-    n.addEventListener('change', chanelTipeFile);
-}
+import { preparation_file, paint_file, obtain_select } from './mainController.js';
+import { UploadFileInDataBase } from './ApiService.js'
 
 // NOTE : EVENTOS
 document.getElementById('select_file').addEventListener('change', function(event){

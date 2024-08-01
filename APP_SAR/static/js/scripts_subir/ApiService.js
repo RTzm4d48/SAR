@@ -1,5 +1,5 @@
 import { preparation_file, valid_extension_file } from './mainController.js';
-import { getCookie } from './utils.js';
+import { getCookie } from '../utils.js';
 
 export function UploadFileInDataBase(file) {
     const formData = new FormData();

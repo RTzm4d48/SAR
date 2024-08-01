@@ -18,31 +18,31 @@ def subir(request):
     return render(request, 'subir.html')
 
 def registros(request):
-    print("SEGURO HAY MAS DE UNA FORMA")
+    modelo1 = list(sari.objects.all().values('name_file', 'code', 'code_destino', 'extension', 'id', 'tipo'))[::-1]
 
-    modelo1 = list(sari.objects.all().values('name_file', 'code', 'code_destino', 'extension', 'id'))[::-1]
-    modelo2 = list(sara.objects.all().values('name_file', 'code', 'code_destino', 'extension', 'id'))[::-1]
-    modelo3 = list(sarda.objects.all().values('name_file', 'code', 'code_destino', 'extension', 'id'))[::-1]
-    modelo4 = list(sarv.objects.all().values('name_file', 'code', 'code_destino', 'extension', 'id'))[::-1]
-
-    # Añade un identificador para cada tipo de objeto si es necesario
-    for registro in modelo1:
-        registro['tipo'] = 'sari'
-    for registro in modelo2:
-        registro['tipo'] = 'sara'
-    for registro in modelo3:
-        registro['tipo'] = 'sarda'
-    for registro in modelo4:
-        registro['tipo'] = 'sarv'
-
-    # Combina todos los registros en un solo array
-    todos_los_registros = modelo1 + modelo2 + modelo3 + modelo4
     # print(todos_los_registros)
-
-    data_json = json.dumps(todos_los_registros)
+    data_json = json.dumps(modelo1)
 
     return render(request, 'registros.html', {'data': data_json})
 
+@csrf_exempt
+def obtain_data(request):
+    if request.method == 'POST':
+        type_file = request.POST.get('type_file')
+
+        if(type_file == 'sari'):
+            modelo1 = list(sari.objects.all().values('name_file', 'code', 'code_destino', 'extension', 'id', 'tipo'))[::-1]
+        elif(type_file == 'sara'):
+            modelo1 = list(sara.objects.all().values('name_file', 'code', 'code_destino', 'extension', 'id', 'tipo'))[::-1]
+        elif(type_file == 'sarda'):
+            modelo1 = list(sarda.objects.all().values('name_file', 'code', 'code_destino', 'extension', 'id', 'tipo'))[::-1]
+        elif(type_file == 'sarv'):
+            modelo1 = list(sarv.objects.all().values('name_file', 'code', 'code_destino', 'extension', 'id', 'tipo'))[::-1]
+
+        data = {'data': modelo1}
+        return JsonResponse(data)
+    else:
+        return JsonResponse({'error': 'Método no permitido'}, status=405)
 
 @csrf_exempt
 def upload_file(request):
@@ -102,11 +102,11 @@ def write_file(file_name, imgcapture, typeFile, destination):
 def insert_dataBase(file_name, typeFile, code_file, code_destino, extension):
     # NOTE : INSERTAMOS LOS DATOS EN LA BASE DE DATOS
     if(typeFile == 'image'):
-        insert_file = sari(name_file=file_name, code=code_file, code_destino=code_destino, extension=extension)
+        insert_file = sari(name_file=file_name, code=code_file, code_destino=code_destino, extension=extension, tipo='sari')
     elif(typeFile == 'audio'):
-        insert_file = sara(name_file=file_name, code=code_file, code_destino=code_destino, extension=extension)
+        insert_file = sara(name_file=file_name, code=code_file, code_destino=code_destino, extension=extension, tipo='sara')
     elif(typeFile == 'video'):
-        insert_file = sarv(name_file=file_name, code=code_file, code_destino=code_destino, extension=extension)
+        insert_file = sarv(name_file=file_name, code=code_file, code_destino=code_destino, extension=extension, tipo='sarv')
     elif(typeFile == 'rar'):
-        insert_file = sarda(name_file=file_name, code=code_file, code_destino=code_destino, extension=extension)
+        insert_file = sarda(name_file=file_name, code=code_file, code_destino=code_destino, extension=extension, tipo='sarda')
     insert_file.save()

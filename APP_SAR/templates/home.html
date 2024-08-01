@@ -21,11 +21,11 @@
             </section>
             <section>
                 <div class="organinsm_switch_cont">
-                    <div id="id_folder" class="folder">
+                    <div id="select_registros" class="folder">
                         <label for="opcion1">Registros</label>
-                        <input type="radio" id="opcion1" name="tipe_file" value="folder">
+                        <input type="radio" id="opcion1" name="tipe_file" value="registros">
                     </div>
-                    <div id="id_file" class="file">
+                    <div id="subir_select" class="file">
                         <label for="opcion2">Subir</label>
                         <input type="radio" id="opcion2" name="tipe_file" value="file">
                     </div>
@@ -36,7 +36,7 @@
             {% endblock %}
         </div>
     </div>
-    <!-- <script type="module" src="{% static 'js/main.js' %}"></script> -->
+    <script type="module" src="{% static 'js/init.js' %}"></script>
     {% block scriptContent %}
     <!-- STUB : LOS SCRIPTS -->
     {% endblock %}

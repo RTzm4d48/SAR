@@ -1,4 +1,4 @@
-import { date, code_file } from './utils.js';
+import { date, code_file } from '../utils.js';
 
 export function obtain_select() {
     var selectElement = document.getElementById('seleccion');

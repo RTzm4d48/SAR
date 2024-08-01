@@ -7,6 +7,7 @@ class sari(models.Model):
     code_destino = models.CharField(max_length=20, null=True) # YA SEA DEL CEDEMA U OTRO CODIGO PAL QUE ESTE DESTINADOE ESTE ARCHIVO
     created = models.DateTimeField(auto_now_add=True)
     extension = models.CharField(max_length=10)
+    tipo = models.CharField(max_length=20, default='') # sari, sara, sarda, sarv
 
     def __str__(self):
         return self.name_file
@@ -17,6 +18,8 @@ class sara(models.Model):
     code_destino = models.CharField(max_length=20, null=True) # YA SEA DEL CEDEMA U OTRO CODIGO PAL QUE ESTE DESTINADOE ESTE ARCHIVO
     created = models.DateTimeField(auto_now_add=True)
     extension = models.CharField(max_length=10)
+    tipo = models.CharField(max_length=20, default='') # sari, sara, sarda, sarv
+
 
     def __str__(self):
         return self.name_file
@@ -28,6 +31,8 @@ class sarda(models.Model):
     code_destino = models.CharField(max_length=20, null=True) # YA SEA DEL CEDEMA U OTRO CODIGO PAL QUE ESTE DESTINADOE ESTE ARCHIVO
     created = models.DateTimeField(auto_now_add=True)
     extension = models.CharField(max_length=10)
+    tipo = models.CharField(max_length=20, default='') # sari, sara, sarda, sarv
+
 
     def __str__(self):
         return self.name_file
@@ -38,6 +43,8 @@ class sarv(models.Model):
     code_destino = models.CharField(max_length=20, null=True) # YA SEA DEL CEDEMA U OTRO CODIGO PAL QUE ESTE DESTINADOE ESTE ARCHIVO
     created = models.DateTimeField(auto_now_add=True)
     extension = models.CharField(max_length=10)
+    tipo = models.CharField(max_length=20, default='') # sari, sara, sarda, sarv
+
 
     def __str__(self):
         return self.name_file
