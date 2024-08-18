@@ -2,6 +2,7 @@
 .vscode/
 .env
 .DS*
+.rar
 
 SARA/
 SARDA/
