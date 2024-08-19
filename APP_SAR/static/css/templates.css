@@ -1,11 +1,13 @@
 .template_contPrincipal {
-    /* height: 100vh; */
+    min-height: 100vh;
+    /* background: red; */
 }
 
 .template_contForm {
     margin: auto;
     width: 100%;
     /* background: blue; */
+    margin: auto;
 
     & section {
         /* background: red; */
