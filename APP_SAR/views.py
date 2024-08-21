@@ -105,3 +105,6 @@ def insert_dataBase(file_name, typeFile, code_file, code_destino, extension, des
     insert_file.save()
 
     return insert_file
+
+def show_information(request):
+     print("Aqui estamos!")
