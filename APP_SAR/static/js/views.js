@@ -36,18 +36,11 @@ function codeInser_view(name_file, tipo, destino) {
     let video_codeInsert = '';
     let rar_codeInsert = '';
 
-    if (destino.startsWith('sar-cedema')) {
-        img_codeInsert = "<div class='cedema_img'>\n    <a href='"+path+"' target='_blank'>\n        <img src='"+path+"'>\n    </a>\n</div>";
-        audio_codeInsert = `<div class="cedema_audio">\n    <audio class="audioPlayer" controls>\n        <source src="${path}" type="audio/mp3">\n    </audio>\n</div>`;
-        video_codeInsert = `<div class="cedema_video">\n    <section>\n        <video class="videoPlayer" playsinline controls>\n            <source src="${path}" type="video/mp4"/>\n        </video>\n    </section>\n</div>`;       
-        rar_codeInsert = `<div class="cedema_rar">\n    <img src="http://localhost:7000/media/SARI/sar-otros/rar-krjv-2_Ago_2024-GO6.png">\n    <a href='${path}'>Nombre_de_carpeta_comprimida</a>\n</div>`;
-    }else if (destino.startsWith('sar-otros')) {
-        img_codeInsert = path;
-        audio_codeInsert = path;
-        video_codeInsert = path;
-        rar_codeInsert = path;
-    }
-
+    img_codeInsert = "<div class='cedema_img'>\n    <a href='"+path+"' target='_blank'>\n        <img src='"+path+"'>\n    </a>\n</div>";
+    audio_codeInsert = `<div class="cedema_audio">\n    <audio class="audioPlayer" controls>\n        <source src="${path}" type="audio/mp3">\n    </audio>\n</div>`;
+    video_codeInsert = `<div class="cedema_video">\n    <section>\n        <video class="videoPlayer" playsinline controls>\n            <source src="${path}" type="video/mp4"/>\n        </video>\n    </section>\n</div>`;       
+    rar_codeInsert = `<div class="cedema_rar">\n    <img src="http://localhost:7000/media/SARI/sar-otros/rar-krjv-2_Ago_2024-GO6.png">\n    <a href='${path}'>Nombre_de_carpeta_comprimida</a>\n</div>`;
+    
 
     if (tipo == 'sari') {
         return {"html_view": img_html_view, "code_inner": img_codeInsert};

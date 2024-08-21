@@ -7,17 +7,13 @@ Estructura de carpetas de 'media'
 
 📁 media/
 ├── 📁 SARA
-│ ├── 📁 sar-cedema
-│ └── 📁 sar-otros
+│ └── 📁 Stack_n1
 │
 ├── 📁 SARDA
-│ ├── 📁 sar-cedema
-│ └── 📁 sar-otros
+│ └── 📁 Stack_n1
 │
 ├── 📁 SARI
-│ ├── 📁 sar-cedema
-│ └── 📁 sar-otros
+│ └── 📁 Stack_n1
 │
 └── 📁 SARV
-  ├── 📁 sar-cedema
-  └── 📁 sar-otros
+  └── 📁 Stack_n1

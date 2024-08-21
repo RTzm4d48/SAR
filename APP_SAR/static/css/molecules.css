@@ -150,6 +150,23 @@
             outline: none;
         }
     }
+
+    .info_destino {
+        line-height: 1.3;
+
+        & p {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 3px 0;
+        }
+
+        & span {
+            color: rgb(28, 115, 255);
+            font-weight: bold;
+        }
+        .destino {
+            color: white;
+        }
+    }
 }
 
 .molecule_dialog_message {

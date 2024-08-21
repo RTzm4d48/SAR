@@ -7,19 +7,16 @@ export function UploadFileInDataBase(file) {
     const formData = new FormData();
 
     let data_prepare = preparation_file();
-    // console.log("file codigo", data_prepare['fileCode'])
-    // console.log("file name", data_prepare['fileName'])
 
     formData.append('name_file', data_prepare['fileName']);
     formData.append('myfile', file);
     formData.append('tipeFile', valid_extension_file()['type']);
-    formData.append('destination', document.getElementById('seleccion').value);
+    formData.append('destination', data_prepare['stack_destino']);
     formData.append('code_file', data_prepare['fileCode']);
-    formData.append('destino', document.getElementById('seleccion').value);
     formData.append('code_destino', document.getElementById('code_moduel').value);
     formData.append('extension', data_prepare['extension']);
 
-    fetch('/uploadFile/', {
+    fetch('/upload_file/', {
         method: 'POST',
         body: formData,
         headers: {
@@ -37,4 +34,23 @@ export function UploadFileInDataBase(file) {
 function show_dile(name_file, code, code_destino, extension, tipo, destino) {
     document.getElementById('cont_ventana_view').innerHTML = ventanaView(name_file, tipo, destino);
     NuevosEventos();
+}
+
+export async function info_destino_stack(type) {
+    const formData = new FormData();
+    formData.append('type', type);
+
+    try {
+        const response = await fetch('/show_information/', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken')
+            }
+        })
+        const data = await response.json();
+        return data['info'];
+    }catch (error){
+        console.error("Ocurrio un error:", error);
+    }
 }

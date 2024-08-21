@@ -1,4 +1,5 @@
 import { date, code_file } from '../utils.js';
+import { info_destino_stack } from './ApiService.js';
 
 export function paint_file(reader) {
     reader.onload = function(e) {
@@ -36,6 +37,8 @@ export function preparation_file() {
     let extension = '.'+valid_extension_file()['extension'];
     
     let fileCode = code_file();
+
+    let stack_destino = document.getElementById('stack_destino').innerText;
     
     let fileName  = `${code_moduel}-${fileCode}-${date()}-GO6${extension}`;
 
@@ -53,7 +56,24 @@ export function preparation_file() {
         nombre: <span>${fileName}</span>`;
     }
     document.getElementById('text_explication').innerHTML = text;
-    return {fileCode, fileName, extension};
+    return {fileCode, fileName, extension, stack_destino};
+}
+
+export async function destino_stack() {
+    let type = valid_extension_file()['type'];
+
+    let data = await info_destino_stack(type);
+    let stack_destino = 'Stack_n'+data['num_stack'];
+
+    let info_destino = document.getElementById('info_destino');
+    let htmlinner = `
+        <p>Carpeta Destino:</p>
+        <p><span>${stack_destino}:</span> ${data['file_count']}, <span>Espacio:</span> ${data['space_file']}</p>
+        <p><span>Destino:</span> <span class="destino" id="stack_destino">${stack_destino}</span></p>
+    `;
+
+    info_destino.innerHTML = '';
+    info_destino.innerHTML = htmlinner;
 }
 
 
