@@ -21,7 +21,7 @@ def subir(request):
     return render(request, 'subir.html')
 
 def registros(request):
-    modelo1 = list(sar.objects.all().values('name_file', 'code', 'code_destino', 'extension', 'id', 'tipo', 'destino'))[::-1]
+    modelo1 = list(sar.objects.all().values('name_file', 'code', 'code_destino', 'extension', 'id', 'tipo', 'destino', 'old_name'))[::-1]
 
     # print(todos_los_registros)
     data_json = json.dumps(modelo1)
@@ -33,8 +33,7 @@ def obtain_data(request):
     if request.method == 'POST':
         type_file = request.POST.get('type_file')
 
-        modelo1 = list(sar.objects.filter(tipo = type_file).values('name_file', 'code', 'code_destino', 'extension', 'id', 'tipo'))[::-1]
-
+        modelo1 = list(sar.objects.filter(tipo = type_file).values('name_file', 'code', 'code_destino', 'extension', 'id', 'tipo', 'old_name'))[::-1]
         data = {'data': modelo1}
         return JsonResponse(data)
     else:
@@ -46,15 +45,16 @@ def upload_file(request):
         name_file = request.POST.get('name_file')
         myfile = request.FILES.get('myfile')
         typeFile = request.POST.get('tipeFile')
+        nameFile = request.POST.get('nameFile')
         destination = request.POST.get('destination')
         code_file = request.POST.get('code_file')
         code_destino = request.POST.get('code_destino')
         extension = request.POST.get('extension')
 
         finalPath = write_file(name_file, myfile, typeFile, destination)
-        obj_data = insert_dataBase(finalPath, typeFile, code_file, code_destino, extension, destination)
+        obj_data = insert_dataBase(finalPath, typeFile, code_file, code_destino, extension, destination, nameFile)
 
-        response_data = {"id": obj_data.id, "name_file": obj_data.name_file, "code": obj_data.code, "code_destino": obj_data.code_destino, "extension": obj_data.extension, "tipo": obj_data.tipo, "destino": obj_data.destino}
+        response_data = {"id": obj_data.id, "name_file": obj_data.name_file, "code": obj_data.code, "code_destino": obj_data.code_destino, "extension": obj_data.extension, "destino": obj_data.destino, "tipo": obj_data.tipo, "old_name": obj_data.old_name}
         
         return JsonResponse(response_data)
     else:
@@ -74,7 +74,7 @@ def write_file(file_name, imgcapture, typeFile, destination):
                 path_folder = f'media/SARA/{destination}'
         elif(typeFile == 'video'):
                 path_folder = f'media/SARV/{destination}'
-        elif(typeFile == 'rar'):
+        elif(typeFile in ['rar', 'file']):
                 path_folder = f'media/SARDA/{destination}'
         
         if not os.path.exists(f'APP_SAR/{path_folder}'):
@@ -89,18 +89,20 @@ def write_file(file_name, imgcapture, typeFile, destination):
         return f'{path_folder}/{file_name}'
 
 
-def insert_dataBase(file_name, typeFile, code_file, code_destino, extension, destino):
+def insert_dataBase(file_name, typeFile, code_file, code_destino, extension, destino, nameFile):
     # NOTE : INSERTAMOS LOS DATOS EN LA BASE DE DATOS
-    tipo = ''
+    destino = ''
+    oldname = '';
     if(typeFile == 'image'):
-        tipo = 'sari'
+        destino = 'sari'
     elif(typeFile == 'audio'):
-        tipo = 'sara'
+        destino = 'sara'
     elif(typeFile == 'video'):
-        tipo = 'sarv'
-    elif(typeFile == 'rar'):
-        tipo = 'sarda'
-    insert_file = sar(name_file=file_name, code=code_file, code_destino=code_destino, extension=extension, tipo=tipo, destino=destino)
+        destino = 'sarv'
+    elif(typeFile in ['rar', 'file']):
+        destino = 'sarda'
+        oldname = nameFile
+    insert_file = sar(name_file=file_name, code=code_file, code_destino=code_destino, extension=extension, destino=destino, tipo=typeFile, old_name=oldname)
     insert_file.save()
 
     return insert_file
@@ -117,19 +119,23 @@ def show_information(request):
         return JsonResponse({'error': 'Método no permitido'}, status=405)
     
 def validStack(typeFile):
+    print("GOMI", typeFile)
     result = None
     for i in range(10):
         destination = f'Stack_n{i+1}'
 
         path_folder = ''
         if(typeFile == 'image'):
-                path_folder = f'APP_SAR/media/SARI/{destination}'
+            path_folder = f'APP_SAR/media/SARI/{destination}'
         elif(typeFile == 'audio'):
-                path_folder = f'APP_SAR/media/SARA/{destination}'
+            path_folder = f'APP_SAR/media/SARA/{destination}'
         elif(typeFile == 'video'):
-                path_folder = f'APP_SAR/media/SARV/{destination}'
+            path_folder = f'APP_SAR/media/SARV/{destination}'
         elif(typeFile == 'rar'):
-                path_folder = f'APP_SAR/media/SARDA/{destination}'
+            path_folder = f'APP_SAR/media/SARDA/{destination}'
+        elif(typeFile == 'file'):
+            path_folder = f'APP_SAR/media/SARDA/{destination}'
+             
 
         ruta = Path(path_folder)
         file_count = len(list(ruta.glob('*')))

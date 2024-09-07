@@ -15,6 +15,7 @@ export function paint_file(reader) {
             Tu navegador no soporta el elemento de video.
         </video>`;
         let rar_html_view = `<img src="/static/img/rar_icon.png" style="height: 30%; margin: auto;">`;
+        let file_html_view = `<img src="/static/img/file_icon.png" style="height: 30%; margin: auto;">`;
 
 
         if (type == 'image') {
@@ -25,6 +26,8 @@ export function paint_file(reader) {
             document.getElementById('view').innerHTML = video_html_view;
         }else if (type == 'rar') {
             document.getElementById('view').innerHTML = rar_html_view;
+        }else if (type == 'file') {
+            document.getElementById('view').innerHTML = file_html_view;
         }
     };
 }
@@ -52,7 +55,10 @@ export function preparation_file() {
         text = `El archivo se subira al servidor de <span>SARV</span> correspondiente a archivos de <span>video</span> con referencia al modulo <span>${code_moduel}</span><br>
         nombre: <span>${fileName}</span>`;
     }else if (type == 'rar') {
-        text = `El archivo se subira al servidor de <span>SARDA</span> correspondiente a archivos de <span>.rar</span> con referencia al modulo <span>${code_moduel}</span><br>
+        text = `El archivo se subira al servidor de <span>SARDA</span> correspondiente a archivos de <span>${extension}</span> con referencia al modulo <span>${code_moduel}</span><br>
+        nombre: <span>${fileName}</span>`;
+    }else if (type == 'file') {
+        text = `El archivo se subira al servidor de <span>SARDA</span> correspondiente a archivos de <span>${extension}</span> con referencia al modulo <span>${code_moduel}</span><br>
         nombre: <span>${fileName}</span>`;
     }
     document.getElementById('text_explication').innerHTML = text;
@@ -94,10 +100,9 @@ export function valid_extension_file() {
         } else if (fileType.startsWith('video/')) {
             return {"type": 'video', "extension": fileExtension};
         } else if (fileType.startsWith('application/')) {
-            return {"type": 'rar', "extension": fileExtension};
+            return {"type": 'rar', "extension": fileExtension, "filename": fileName};
         } else {
-            console.log('Tipo de archivo no soportado');
-            return 'no soport';
+            return {"type": 'file', "extension": fileExtension, "filename": fileName};
         }
     } else {
         console.log('No hay archivo seleccionado');

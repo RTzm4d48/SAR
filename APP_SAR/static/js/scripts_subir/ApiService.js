@@ -11,6 +11,7 @@ export function UploadFileInDataBase(file) {
     formData.append('name_file', data_prepare['fileName']);
     formData.append('myfile', file);
     formData.append('tipeFile', valid_extension_file()['type']);
+    formData.append('nameFile', valid_extension_file()['filename']);
     formData.append('destination', data_prepare['stack_destino']);
     formData.append('code_file', data_prepare['fileCode']);
     formData.append('code_destino', document.getElementById('code_moduel').value);
@@ -26,13 +27,13 @@ export function UploadFileInDataBase(file) {
     .then(response => response.json())
     .then(data => {
         console.log('Success:', data);
-        show_dile(data['name_file'], data['code'], data['code_destino'], data['extension'], data['tipo'], data['destino'])
+        show_dile(data['name_file'], data['tipo'], data['old_name'])
     })
     .catch(error => console.error('Error:', error));
 }
 
-function show_dile(name_file, code, code_destino, extension, tipo, destino) {
-    document.getElementById('cont_ventana_view').innerHTML = ventanaView(name_file, tipo, destino);
+function show_dile(name_file, tipo, old_name) {
+    document.getElementById('cont_ventana_view').innerHTML = ventanaView(name_file, tipo, old_name);
     NuevosEventos();
 }
 

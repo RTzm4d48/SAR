@@ -11,6 +11,7 @@ export function renderisarTabla(data) {
                 <th>Extensión</th>
                 <th>Tipo</th>
                 <th>Destino</th>
+                <th>Old name</th>
             </tr>
             ${html_table_register(data)}
         </table>
@@ -29,6 +30,7 @@ function html_table_register(data) {
                 <td>${data[i].extension}</td>
                 <td>${data[i].tipo}</td>
                 <td>${data[i].destino}</td>
+                <td>${data[i].old_name}</td>
             </tr>
         `;
     }
@@ -47,10 +49,11 @@ function NuevosEventos_tabla() {
                 let extension = e.target.parentElement.children[3].textContent;
                 let tipo = e.target.parentElement.children[4].textContent;
                 let destino = e.target.parentElement.children[5].textContent;
+                let old_name = e.target.parentElement.children[6].textContent;
 
                 this.classList.toggle('active');
 
-                show_dile(name_file, code, code_destino, extension, tipo, destino);
+                show_dile(name_file, tipo, old_name);
                 });
         });
     }
@@ -61,7 +64,7 @@ function NuevosEventos_tabla() {
     }
 }
 
-function show_dile(name_file, code, code_destino, extension, tipo, destino) {
-    document.getElementById('cont_ventana_view').innerHTML = ventanaView(name_file, tipo, destino);
+function show_dile(name_file, tipo, old_name) {
+    document.getElementById('cont_ventana_view').innerHTML = ventanaView(name_file, tipo, old_name);
     NuevosEventos2();
 }
