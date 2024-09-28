@@ -4,7 +4,11 @@
 .DS*
 media.rar
 
+**/*.zip
+
 SARA/
 SARDA/
 SARI/
 SARV/
+
+*.un~
