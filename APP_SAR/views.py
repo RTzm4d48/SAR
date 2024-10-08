@@ -108,10 +108,11 @@ def insert_dataBase(file_name, typeFile, code_file, code_destino, extension, des
     return insert_file
 
 from pathlib import Path
+
+@csrf_exempt
 def show_information(request):
     if request.method == 'POST':
         typeFile = request.POST.get('type')
-       
         info = validStack(typeFile);
 
         return JsonResponse({"info": info})
